@@ -1,5 +1,6 @@
 package com.mauripi.atitude.model;
 
+import com.mauripi.atitude.record.ClienteTO;
 import com.mauripi.atitude.record.ClienteUpdateTO;
 import com.mauripi.atitude.record.EnderecoTO;
 
@@ -46,23 +47,23 @@ public class Cliente{
 	@Column(length=50)
 	private String email;
 
-	public Cliente atualizarDados(@Valid ClienteUpdateTO dados) {
-		return Cliente.builder()
-				.id(dados.id())
-				.nome(dados.nome())
-				.cfpCnpj(dados.cfpCnpj())
-				.endNum(dados.endNum())
-				.telRes(dados.telRes())
-				.telCel(dados.telCel())
-				.email(dados.email())
-				.build();
-		
+	public void atualizarDados(@Valid ClienteUpdateTO dados) {
+		this.nome = dados.nome();
+		this.cfpCnpj = dados.cfpCnpj();
+		this.endNum = dados.endNum();
+		this.telRes = dados.telRes();
+		this.telCel = dados.telCel();
+		this.email = dados.email();
 	}
 
 	public EnderecoTO getEnderecoTO() {
 		if(this.endereco != null)
 			return new EnderecoTO(this.endereco);
 		return null;
+	}
+
+	public ClienteTO toTO() {
+		return new ClienteTO(id, nome, cfpCnpj, getEnderecoTO(), endNum, telRes, telCel, email);
 	}
 
 }
