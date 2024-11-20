@@ -24,11 +24,7 @@ public class VendaController {
 	
 	@GetMapping
 	public ResponseEntity<Page<VendaTO>> findAll(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
-		var page = repository.findAllVendas(pageable).map(venda -> {
-								var tot = venda.getListaItem().size();
-								System.out.println(tot);
-								return new VendaTO(venda);
-							});
+		var page = repository.findAll(pageable).map(VendaTO::new);
 		return ResponseEntity.ok(page);
 	}
 }

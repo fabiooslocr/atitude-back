@@ -19,7 +19,7 @@ public record VendaTO(
 	public VendaTO(Venda venda) {		
 		this(
 				venda.getId(), 
-				venda.getListaItem().stream().peek(a -> System.out.println(a.getProduto().getNome())).map(ItemVendaTO::new).collect(Collectors.toList()), 
+				venda.getListaItem().stream().map(ItemVendaTO::new).collect(Collectors.toList()), 
 				venda.getCliente().toTO(), 
 				venda.getValorTotal(), 
 				venda.getTipo(), 
