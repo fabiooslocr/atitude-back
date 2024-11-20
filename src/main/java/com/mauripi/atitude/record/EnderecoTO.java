@@ -20,4 +20,15 @@ public record EnderecoTO(
 				endereco.getUf());
 	}
 
+	public Endereco toEndereco() {
+		return Endereco.builder()
+				.id(id)
+				.rua(rua)
+				.bairro(bairro)
+				.cep(cep)
+				.cidade(cidade)
+				.uf(uf)
+				.build();
+	}
+
 }

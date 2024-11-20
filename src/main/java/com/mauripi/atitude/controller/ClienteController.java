@@ -63,7 +63,7 @@ public class ClienteController {
 
 	@DeleteMapping("/{id}")
 	@Transactional
-	public ResponseEntity delete(@PathVariable Integer id) {
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		var cliente = repository.getReferenceById(id);
 		repository.delete(cliente);
 		return ResponseEntity.noContent().build();

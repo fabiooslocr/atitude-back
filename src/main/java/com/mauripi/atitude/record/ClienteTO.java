@@ -6,7 +6,7 @@ public record ClienteTO(
 			Integer id,
 			String nome,
 			String cfpCnpj,
-			EnderecoTO endereco,
+			EnderecoTO enderecoTO,
 			String endNum,
 			String telRes,
 			String telCel,
@@ -19,5 +19,18 @@ public record ClienteTO(
 				cliente.getEnderecoTO(), 
 				cliente.getEndNum(), cliente.getTelRes(),
 				cliente.getTelCel(), cliente.getEmail());
+	}
+
+	public Cliente toCliente() {
+		return Cliente.builder()
+				.id(id)
+				.nome(nome)
+				.cfpCnpj(cfpCnpj)
+				.endereco(enderecoTO.toEndereco())
+				.endNum(endNum)
+				.telRes(telRes)
+				.telCel(telCel)
+				.email(email)
+				.build();
 	}
 }
